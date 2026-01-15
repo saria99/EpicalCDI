@@ -1,0 +1,76 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-03",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-03",
+        "identifier": [
+          {
+            "system": "http://hospital-a.com/patients",
+            "value": "EXT-112233"
+          }
+        ],
+        "name": [
+          {
+            "family": "Bouvier",
+            "given": [
+              "Patty"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1965-10-02"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "enc-03",
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "EMER"
+        },
+        "subject": {
+          "reference": "Patient/pat-03"
+        },
+        "period": {
+          "start": "2025-03-01T22:00:00Z",
+          "end": "2025-03-01T23:30:00Z"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-03",
+        "status": "final",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://loinc.org",
+                    "code": "8480-6",
+                    "display": "Systolic blood pressure"
+                }
+            ]
+        },
+        "subject": {
+          "reference": "Patient/pat-03"
+        },
+        "encounter": {
+          "reference": "Encounter/enc-03"
+        },
+        "effectiveDateTime": "2025-03-01T22:15:00Z",
+        "valueQuantity": {
+          "value": 140,
+          "unit": "mmHg",
+          "system": "http://unitsofmeasure.org",
+          "code": "mm[Hg]"
+        }
+      }
+    }
+  ]
+}
