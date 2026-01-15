@@ -9,4 +9,7 @@
     <Project Path="src/EpicalCDI.ServiceDefaults/EpicalCDI.ServiceDefaults.csproj" />
     <Project Path="src/EpicalCDI.Shared/EpicalCDI.Shared.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Ecw.Tests/Ecw.Tests.csproj" />
+  </Folder>
 </Solution>

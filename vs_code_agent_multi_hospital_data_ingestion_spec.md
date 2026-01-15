@@ -238,3 +238,81 @@ Do NOT implement clinical logic, scoring, or analytics.
 ## End of Scope
 This system strictly ingests and persists hospital data. All interpretation occurs downstream.
 
+---
+
+# eClinicalWorks Testing Project (POC)
+
+## Goal
+Set up an xUnit testing project in C# that uses synthetic eClinicalWorks-like (FHIR R4) data for deterministic, offline testing.
+
+## Constraints
+- Use .NET 10
+- Use xUnit
+- Use HL7 FHIR R4 SDK
+- Use synthetic data only
+- All tests must run offline
+- Project must be compatible with VS Code
+- Follow clean architecture and test best practices
+
+## Phase 1 – Solution & Project Setup
+1. Integrate into existing EpicalCDI.slnx
+2. Create an xUnit project named Ecw.Tests
+3. Add the project to the solution
+4. Restore all NuGet packages
+5. Verify tests are discoverable in VS Code
+
+### Packages
+- xunit
+- xunit.runner.visualstudio
+- Microsoft.NET.Test.Sdk
+- FluentAssertions
+- Hl7.Fhir.R4
+- Bogus
+
+## Phase 2 – Folder Structure
+Inside `Ecw.Tests`:
+- `Data/FhirBundles`
+- `Fixtures`
+- `Helpers`
+
+## Phase 3 – Synthetic FHIR Test Data
+1. Add 3–5 static FHIR R4 Bundle JSON files under `Data/FhirBundles`
+2. Each bundle must include Patient, Encounter, Observation
+3. Ensure deterministic, valid FHIR JSON
+
+## Phase 4 – Shared Test Fixture
+1. Create `Fixtures/FhirFixture.cs`
+2. Load one FHIR Bundle JSON file from disk
+3. Parse it using `FhirJsonParser`
+4. Expose `Bundle` as a public property
+5. Load data once per test run
+
+## Phase 5 – Unit Tests
+**Patient Tests:**
+- Name exists
+- DOB present
+- Gender set
+
+**Encounter Tests:**
+- Status valid
+- References patient
+
+**Observation Tests:**
+- Code present
+- Value present
+- Effective date present
+
+## Phase 6 – Negative & Edge Case Tests
+- Empty bundle
+- Missing patient
+- Invalid observation value
+- Malformed JSON throws exception
+
+## Phase 7 – Optional Mock API
+- Minimal ASP.NET Core API
+- Serve FHIR bundles from disk
+- Integration tests with WebApplicationFactory
+
+## Phase 8 – Test Execution
+Ensure tests run with: `dotnet test`
+
