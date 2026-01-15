@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Modules/">
+    <Project Path="src/Modules/EpicalCDI.Modules.Clinical/EpicalCDI.Modules.Clinical.csproj" />
+    <Project Path="src/Modules/EpicalCDI.Modules.Onboarding/EpicalCDI.Modules.Onboarding.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/EpicalCDI.Api/EpicalCDI.Api.csproj" />
+    <Project Path="src/EpicalCDI.AppHost/EpicalCDI.AppHost.csproj" />
+    <Project Path="src/EpicalCDI.ServiceDefaults/EpicalCDI.ServiceDefaults.csproj" />
+    <Project Path="src/EpicalCDI.Shared/EpicalCDI.Shared.csproj" />
+  </Folder>
+</Solution>
