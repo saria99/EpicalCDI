@@ -11,14 +11,14 @@ public class FhirFixture : IDisposable
 
     public FhirFixture()
     {
-        var parser = new FhirJsonParser();
+        var deserializer = new FhirJsonDeserializer();
 
-        Bundle01 = LoadBundle(parser, "bundle-01-basic.json");
-        Bundle02 = LoadBundle(parser, "bundle-02-inpatient.json");
-        Bundle03 = LoadBundle(parser, "bundle-03-emergency.json");
+        Bundle01 = LoadBundle(deserializer, "bundle-01-basic.json");
+        Bundle02 = LoadBundle(deserializer, "bundle-02-inpatient.json");
+        Bundle03 = LoadBundle(deserializer, "bundle-03-emergency.json");
     }
 
-    private Bundle LoadBundle(FhirJsonParser parser, string fileName)
+    private Bundle LoadBundle(FhirJsonDeserializer deserializer, string fileName)
     {
         // Adjust path to point to the Data/FhirBundles location. 
         // When running tests, the execution directory might be bin/Debug/net10.0
@@ -39,7 +39,7 @@ public class FhirFixture : IDisposable
         }
 
         string json = File.ReadAllText(path);
-        return parser.Parse<Bundle>(json);
+        return deserializer.Deserialize<Bundle>(json);
     }
 
     public void Dispose()

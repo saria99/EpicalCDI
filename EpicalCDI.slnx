@@ -10,6 +10,7 @@
     <Project Path="src/EpicalCDI.Shared/EpicalCDI.Shared.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Ecw.MockApi/Ecw.MockApi.csproj" />
     <Project Path="tests/Ecw.Tests/Ecw.Tests.csproj" />
   </Folder>
 </Solution>

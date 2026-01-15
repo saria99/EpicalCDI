@@ -1,0 +1,23 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-missing-patient",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-no-pat",
+        "status": "final",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://loinc.org",
+                    "code": "8867-4",
+                    "display": "Heart rate"
+                }
+            ]
+        }
+      }
+    }
+  ]
+}
