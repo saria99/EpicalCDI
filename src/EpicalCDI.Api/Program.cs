@@ -1,5 +1,7 @@
 using EpicalCDI.Modules.Onboarding.Infrastructure;
 using EpicalCDI.Modules.Clinical.Infrastructure;
+using EpicalCDI.Modules.Onboarding.Endpoints;
+using EpicalCDI.Modules.Clinical.Endpoints;
 using Scalar.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -39,6 +41,9 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
+
+app.MapHospitalEndpoints();
+app.MapClinicalStatsEndpoints();
 
 app.UseHttpsRedirection();
 

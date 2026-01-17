@@ -10,4 +10,8 @@ builder.AddProject<Projects.EpicalCDI_Api>("api")
        .WithReference(redis)
        .WithReference(db);
 
+builder.AddNpmApp("web", "../EpicalCDI.Web")
+       .WithHttpEndpoint(env: "PORT")
+       .WithExternalHttpEndpoints();
+
 builder.Build().Run();
