@@ -1,15 +1,19 @@
+extern alias MockApi;
+
 using System.Net;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
+using MockApiProgram = MockApi::Program;
+
 namespace Ecw.Tests;
 
-public class MockApiTests : IClassFixture<WebApplicationFactory<Program>>
+public class MockApiTests : IClassFixture<WebApplicationFactory<MockApiProgram>>
 {
-    private readonly WebApplicationFactory<Program> _factory;
+    private readonly WebApplicationFactory<MockApiProgram> _factory;
 
-    public MockApiTests(WebApplicationFactory<Program> factory)
+    public MockApiTests(WebApplicationFactory<MockApiProgram> factory)
     {
         _factory = factory;
     }

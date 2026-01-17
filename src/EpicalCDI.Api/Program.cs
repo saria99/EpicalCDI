@@ -1,10 +1,22 @@
 using EpicalCDI.Modules.Onboarding.Infrastructure;
 using EpicalCDI.Modules.Clinical.Infrastructure;
 using Scalar.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var authSettings = builder.Configuration.GetSection("Authentication");
+        options.Authority = authSettings["Authority"];
+        options.Audience = authSettings["Audience"];
+        options.RequireHttpsMetadata = bool.Parse(authSettings["RequireHttpsMetadata"] ?? "true");
+    });
+
+builder.Services.AddAuthorization();
 
 builder.AddNpgsqlDbContext<OnboardingDbContext>("epicalcdi-db");
 builder.AddNpgsqlDbContext<ClinicalDbContext>("epicalcdi-db");
@@ -16,6 +28,10 @@ builder.Services.AddOpenApi();
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
+
+app.UseHeaderPropagation();
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -43,7 +59,8 @@ app.MapGet("/weatherforecast", () =>
         .ToArray();
     return forecast;
 })
-.WithName("GetWeatherForecast");
+.WithName("GetWeatherForecast")
+.RequireAuthorization();
 
 app.Run();
 
@@ -51,3 +68,5 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+public partial class Program { }

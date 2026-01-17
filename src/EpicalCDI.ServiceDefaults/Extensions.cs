@@ -19,6 +19,11 @@ public static class Extensions
 
         builder.Services.AddServiceDiscovery();
 
+        builder.Services.AddHeaderPropagation(options =>
+        {
+            options.Headers.Add("Authorization");
+        });
+
         builder.Services.ConfigureHttpClientDefaults(http =>
         {
             // Turn on resilience by default
@@ -26,6 +31,8 @@ public static class Extensions
 
             // Turn on service discovery by default
             http.AddServiceDiscovery();
+
+            http.AddHeaderPropagation();
         });
 
         return builder;
